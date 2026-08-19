@@ -1,11 +1,8 @@
 """
 tests/test_service.py
 
-Unit tests for the reconciliation logic and the date-window validation
-rule. None of these tests touch a real database -- the connector
-functions are replaced with mocks via `unittest.mock.patch`, so the
-tests run fast and deterministically in CI without any external
-dependency.
+Unit tests for the reconciliation logic and the date-window validation.
+Connector functions are mocked, so no real database is needed to run these.
 """
 
 import datetime
@@ -18,11 +15,6 @@ from src.api import _validate_reference_date
 from src.models import BranchBalance
 from src.service import reconcile_branches
 
-
-# ---------------------------------------------------------------------------
-# reconcile_branches: patch both connector functions so the service layer
-# is tested in isolation from anything database-related.
-# ---------------------------------------------------------------------------
 
 @patch("src.service.fetch_erp_balances")
 @patch("src.service.fetch_legacy_balances")
@@ -70,12 +62,6 @@ def test_reconcile_branches_returns_nothing_when_values_match(mock_fetch_legacy,
 
     assert result == []
 
-
-# ---------------------------------------------------------------------------
-# _validate_reference_date: boundary-condition tests for the business rule.
-# `today` is injected explicitly so these tests never depend on the actual
-# calendar date they happen to run on.
-# ---------------------------------------------------------------------------
 
 FIXED_TODAY = datetime.date(2026, 6, 15)
 

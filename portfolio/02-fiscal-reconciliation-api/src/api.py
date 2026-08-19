@@ -1,17 +1,9 @@
 """
 src/api.py
 
-FastAPI layer. Its main job beyond routing is enforcing a business rule
-that has nothing to do with HTTP: a reconciliation can only be requested
-for a date within the last `lookback_window_days` days, and NOT for today
--- today's data isn't considered "closed" yet (transactions can still be
-posted for the current day), so reconciling it would just report false
-divergences that resolve themselves a few hours later.
-
-This validation deliberately lives in its own testable function
-(`_validate_reference_date`) instead of being buried inline in the route
-handler, so it can be unit tested directly without spinning up an HTTP
-client -- see tests/test_service.py for the boundary-condition tests.
+FastAPI layer. Also enforces the business rule that a reconciliation can
+only be requested for a date within the allowed lookback window, and not
+for today (today's data isn't considered closed yet).
 """
 
 from __future__ import annotations
@@ -28,23 +20,11 @@ app = FastAPI(title="Fiscal Reconciliation API")
 
 
 def _validate_reference_date(reference_date_str: str, today: datetime.date | None = None) -> datetime.date:
-    """Validate that `reference_date_str` falls within the allowed
-    lookback window: strictly before today, and no further back than
-    `settings.lookback_window_days`.
+    """Validate that the date is before today and within the lookback window.
 
-    Args:
-        reference_date_str: the date to validate, ISO format.
-        today: injectable for testing (defaults to the real "today" if
-            omitted). This is the fix for a subtle bug: using
-            `datetime.date.today()` directly as a function DEFAULT
-            argument evaluates it once, at import time, not on every
-            call -- so "today" would silently freeze at whatever date the
-            server happened to start on. Passing it as a real parameter
-            with a runtime default avoids that trap entirely.
-
-    Raises:
-        HTTPException: 400 if the date is malformed, today, or outside
-            the allowed window.
+    `today` is a parameter (not just datetime.date.today() used inline)
+    so it can be injected in tests instead of depending on the real
+    calendar date.
     """
     if today is None:
         today = datetime.date.today()
@@ -75,9 +55,7 @@ def _validate_reference_date(reference_date_str: str, today: datetime.date | Non
 
 @app.post("/reconciliation")
 def run_reconciliation(request: ReconciliationRequest):
-    """Trigger a reconciliation run for a given reference date and return
-    the list of divergent branches.
-    """
+    """Trigger a reconciliation run and return the list of divergent branches."""
     validated_date = _validate_reference_date(request.reference_date)
     divergences = reconcile_branches(validated_date.isoformat())
     return {"reference_date": validated_date.isoformat(), "divergences": [d.model_dump() for d in divergences]}
