@@ -1,0 +1,5 @@
+mcp[cli]>=1.28,<2
+requests>=2.31
+
+# Only needed if you swap Ollama for a Hugging Face-served model:
+# huggingface_hub>=0.24

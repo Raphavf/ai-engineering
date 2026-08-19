@@ -52,6 +52,16 @@ instead of its own memory.
 **Concepts demonstrated:** RAG architecture, embeddings, vector similarity search with FAISS,
 LangChain, prompting an LLM to answer only from retrieved context.
 
+### 5. [`local-llm-mcp-host`](./05-local-llm-mcp-host)
+A zero-cost variant of project 1's architecture: instead of a hosted assistant (Claude Desktop, etc.)
+acting as the MCP host, this is a small Python script that plays that role itself, talking to an
+open-source model served locally (Ollama, or a self-hosted Hugging Face model) instead of a paid API.
+This is the architecture I'd use to expose the reconciliation tools internally without sending fiscal
+data outside company infrastructure.
+
+**Concepts demonstrated:** writing an MCP *host* (not just a server) from scratch, the tool-calling
+agentic loop end to end, running entirely on self-hosted/open-source infrastructure.
+
 ## A recurring theme across these projects
 
 **The AI layer is only as trustworthy as the data layer underneath it.** Before I let an LLM call a
