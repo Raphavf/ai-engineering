@@ -1,0 +1,22 @@
+[
+  {
+    "name": "Lisbon, Portugal",
+    "description": "A hilly coastal capital known for its pastel buildings, tram 28 route, fado music, and easy day trips to Sintra. Great for travelers who want walkable old-town charm with strong food and coffee culture, mild winters, and a lower cost of living than most of Western Europe."
+  },
+  {
+    "name": "Kyoto, Japan",
+    "description": "Japan's former capital, packed with temples, traditional wooden machiya houses, and the Arashiyama bamboo grove. Best for travelers interested in history, quiet gardens, and a slower pace than Tokyo. Cherry blossom season (late March-April) and autumn foliage (November) are the most popular times to visit."
+  },
+  {
+    "name": "Cartagena, Colombia",
+    "description": "A colorful Caribbean port city with a walled colonial old town, salsa music, and nearby beaches on the Rosario Islands. Good fit for travelers wanting warm weather year-round, vibrant nightlife, and a mix of history and beach time in one trip."
+  },
+  {
+    "name": "Queenstown, New Zealand",
+    "description": "An adventure-sports hub on Lake Wakatipu, surrounded by mountains. Bungee jumping, skydiving, hiking, and skiing in winter. Best for travelers prioritizing outdoor activities and dramatic scenery over city life; it's a small town, not a metropolis."
+  },
+  {
+    "name": "Marrakech, Morocco",
+    "description": "A city built around a maze-like medina, souks, and riads with interior courtyards. Known for intense sensory experiences -- markets, spices, mint tea -- and easy access to the Atlas Mountains and Sahara desert tours. Good for travelers who enjoy bargaining, dense old-city exploration, and don't mind heat in summer."
+  }
+]

@@ -1,0 +1,9 @@
+fastapi>=0.115
+uvicorn>=0.30
+pydantic>=2.7
+pydantic-settings>=2.3
+pytest>=8.0
+
+# Optional, only needed to actually connect to real databases:
+# oracledb>=2.0
+# hdbcli>=2.19

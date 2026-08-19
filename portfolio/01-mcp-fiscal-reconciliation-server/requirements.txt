@@ -1,0 +1,13 @@
+# MCP SDK - pinned below v2, since v2 changed the import path used here
+# (from mcp.server.fastmcp import FastMCP). If you're starting fresh with
+# the v2 API, adjust the imports in server.py accordingly.
+mcp[cli]>=1.28,<2
+
+pandas>=2.2
+cryptography>=42.0
+keyring>=25.0
+
+# Optional, only needed if you actually wire up connectors.py against
+# real databases:
+# oracledb>=2.0
+# hdbcli>=2.19
