@@ -79,4 +79,4 @@ place.
 - Hands-on with LangChain, LangGraph, LangSmith, RAG/embeddings, MCP tool-calling, and the Anthropic
   API.
 - Actively looking for remote AI Engineering / AI Automation roles.
-- [LinkedIn](#) · [Email](#)
+- [LinkedIn](https://www.linkedin.com/in/raphael-muniz-pacheco-41061677/) · [Email](r.munizpacheco@hotmail.com)
