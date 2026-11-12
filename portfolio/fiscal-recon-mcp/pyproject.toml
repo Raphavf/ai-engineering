@@ -1,0 +1,42 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "fiscal-recon-mcp"
+version = "0.2.0"
+description = "MCP server and REST API for reconciling fiscal documents across ERP systems"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    # Pinned below v2: v2 changed the FastMCP import path used in mcp_server.py
+    "mcp[cli]>=1.28,<2",
+    "pandas>=2.2",
+    "pydantic>=2.7",
+    "pydantic-settings>=2.3",
+    "cryptography>=42.0",
+    "keyring>=25.0",
+    "fastapi>=0.115",
+    "uvicorn>=0.30",
+]
+
+[project.optional-dependencies]
+oracle = ["oracledb>=2.0"]
+hana = ["hdbcli>=2.19"]
+host = ["requests>=2.31"]
+dev = ["pytest>=8.0", "httpx>=0.27", "requests>=2.31"]
+
+[project.scripts]
+fiscal-recon-mcp = "fiscal_recon.mcp_server:main"
+fiscal-recon-seed = "fiscal_recon.synthetic:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src", "."]
+markers = [
+    "integration: needs the docker-compose Oracle container (run with -m integration)",
+]
+addopts = "-m 'not integration'"
